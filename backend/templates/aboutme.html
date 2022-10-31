@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'head.html' %}
+</head>
+
+<body>
+    <div class="container-scroller">
+
+        {% include 'header.html' %}
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+
+            {% include 'sidebar.html' %}
+
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="d-flex justify-content-between flex-wrap">
+                                <div class="d-flex align-items-end flex-wrap">
+                                    <div class="me-md-3 me-xl-5">
+                                        <h4>About Me</h4>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- <h4 class="card-title">Add/Update data</h4> -->
+                                    <form class="form-sample">
+
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Paragraph</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea type="text" name="aboutme[]" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group row">
+                                                    <a class="col-sm-12 btn btn-info" id="rowAdder" href="#">Add
+                                                        More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="newinput"></div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <button type="submit" class="col-sm-3 btn btn-primary">
+                                                        Save
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                {% include 'footer.html' %}
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    {% include 'scripts.html' %}
+
+    <script type="text/javascript">
+
+        $("#rowAdder").click(function () {
+            newRowAdd = `
+            <div id="row" class="row">
+                                            <div class="col-md-10">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Paragraph</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea type="text" name="aboutme[]" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group row">
+                                                    <button class="btn btn-danger"
+                                            id="DeleteRow" type="button">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </button>
+                                                </div>
+                                            </div>
+                                        </div>`;
+
+            $('#newinput').append(newRowAdd);
+        });
+
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("#row").remove();
+        })
+    </script>
+</body>
+
+</html>
