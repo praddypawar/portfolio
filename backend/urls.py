@@ -8,4 +8,6 @@ urlpatterns = [
     path("<str:uname>-basic-info/",views.basicinfo,name="basicinfo"),
     path("<str:uname>-social-media/",views.socialmedia,name="socialmedia"),
     path("<str:uname>-about-me/",views.aboutme,name="aboutme"),
+    path("<str:uname>-resume/",views.resume,name="resume"),
+    path("<str:uname>-services/",views.services,name="services"),
 ]

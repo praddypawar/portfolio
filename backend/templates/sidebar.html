@@ -22,18 +22,18 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'backend:aboutme' uname %}">
           <i class="mdi mdi-tooltip-text menu-icon"></i>
-          <span class="menu-title">About ME</span>
+          <span class="menu-title">About Me</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
+        <a class="nav-link" href="{% url 'backend:resume' uname %}">
           <i class="mdi mdi-television-guide menu-icon"></i>
           <span class="menu-title">My Resume</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
+        <a class="nav-link" href="{% url 'backend:services' uname %}">
           <i class="mdi mdi-seal menu-icon"></i>
           <span class="menu-title">My Services</span>
         </a>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'head.html' %}
+</head>
+
+<body>
+    <div class="container-scroller">
+
+        {% include 'header.html' %}
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+
+            {% include 'sidebar.html' %}
+
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="d-flex justify-content-between flex-wrap">
+                                <div class="d-flex align-items-end flex-wrap">
+                                    <div class="me-md-3 me-xl-5">
+                                        <h4>My Services</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">WORK EXPERIENCE</h4>
+                                    <form class="form-sample">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Select Icon</label>
+                                                    <div class="col-sm-9">
+                                                            <select class="form-control" name="socialmedia[]"
+                                                                style="height: 5vh!important">
+                                                                <option selected class="form-control">Select media</option>
+                                                                <option value="twitter" class="form-control">
+                                                                    <div><i class="mdi mdi-access-point"></i> mdi mdi-access-point</div>
+                                                                </option>
+                                                                <option value="facebook" class="form-control">Facebook
+                                                                </option>
+                                                                <option value="linkedin" class="form-control">Linkedin
+                                                                </option>
+                                                                <option value="instagram" class="form-control">Instagram
+                                                                </option>
+                                                            </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Services</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="Services[]" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Description</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea name="desc[]" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group row">
+                                                    <a class="col-sm-12 btn btn-info" id="rowAdder" href="#">Add
+                                                        More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="newinput"></div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <button type="submit" class="col-sm-3 btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                {% include 'footer.html' %}
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    {% include 'scripts.html' %}
+
+    <script type="text/javascript">
+
+        $("#rowAdder").click(function () {
+            newRowAdd = `
+            <div id="row" >
+            <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Designation</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="desi[]" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Company</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="company[]" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Start date</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="month" name="sdate[]" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">For End date</label>
+                                                    <div class="col-sm-9" style="padding-top: 3%;">
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)"  class="form-check-input checkenddate" value="N" name="gender"/> Current&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)"  class="form-check-input checkenddate" value="Y" name="gender"/> Select date&nbsp;&nbsp;</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4" id="enddate" style="display:none;">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">End Date</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="month" name="edate[]" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Description</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea name="desc[]" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group row">
+                                                    <button class="btn btn-danger"
+                                            id="DeleteRow" type="button">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </button>
+                                                </div>
+                                            </div>
+                                            <center><hr></center>
+                                        </div> </div>`;
+
+            $('#newinput').append(newRowAdd);
+        });
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("#row").remove();
+        })
+    
+        function checkenddate(e){
+                
+                if(e.value ==="Y"){
+                        $(e).parents(".row").children("#enddate").css("display","block")
+                    }
+                    else{
+                        // $("#enddate").css("display","none")
+                        $(e).parents(".row").children("#enddate").css("display","none")
+                    }
+            }
+    </script>
+
+</body>
+
+</html>

@@ -30,3 +30,17 @@ def aboutme(request,uname):
         "uname":uname
     }
     return render(request,"aboutme.html",context)
+
+def resume(request,uname):
+    uname = "pradip"
+    context = {
+        "uname":uname
+    }
+    return render(request,"resume.html",context)
+
+def services(request,uname):
+    uname = "pradip"
+    context = {
+        "uname":uname
+    }
+    return render(request,"services.html",context)
