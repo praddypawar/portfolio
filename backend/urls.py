@@ -10,4 +10,9 @@ urlpatterns = [
     path("<str:uname>-about-me/",views.aboutme,name="aboutme"),
     path("<str:uname>-resume/",views.resume,name="resume"),
     path("<str:uname>-services/",views.services,name="services"),
+    path("<str:uname>-skill/",views.skill,name="skill"),
+    path("<str:uname>-work/",views.work,name="work"),
+    path("<str:uname>-post/",views.post,name="post"),
+    path("<str:uname>-hireme/",views.hireme,name="hireme"),
+    path("logout/",views.logout,name="logout"),
 ]

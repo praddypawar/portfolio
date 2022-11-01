@@ -1,57 +1,103 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
+      {% if title == "PortfolioBox-dashboard" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
+      {% endif %}
         <a class="nav-link" href="{% url 'backend:dashboard' uname %}">
           <i class="mdi mdi-home menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
+      {% if title == "PortfolioBox-basic-info" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
+      {% endif %}
         <a class="nav-link" href="{% url 'backend:basicinfo' uname %}">
           <i class="mdi mdi-account-convert menu-icon"></i>
           <span class="menu-title">Basic Info</span>
         </a>
       </li>
+      {% if title == "PortfolioBox-social-media" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
+      {% endif %}
         <a class="nav-link" href="{% url 'backend:socialmedia' uname %}">
           <i class="mdi mdi-web menu-icon"></i>
           <span class="menu-title">Social Media</span>
         </a>
       </li>
+      {% if title == "PortfolioBox-about" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
+      {% endif %}
         <a class="nav-link" href="{% url 'backend:aboutme' uname %}">
           <i class="mdi mdi-tooltip-text menu-icon"></i>
           <span class="menu-title">About Me</span>
         </a>
       </li>
 
+      {% if title == "PortfolioBox-resume" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
+      {% endif %}
         <a class="nav-link" href="{% url 'backend:resume' uname %}">
           <i class="mdi mdi-television-guide menu-icon"></i>
           <span class="menu-title">My Resume</span>
         </a>
       </li>
+      {% if title == "PortfolioBox-services" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
+      {% endif %}
         <a class="nav-link" href="{% url 'backend:services' uname %}">
           <i class="mdi mdi-seal menu-icon"></i>
           <span class="menu-title">My Services</span>
         </a>
       </li>
+      {% if title == "PortfolioBox-skill" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
+      {% endif %}
+        <a class="nav-link" href="{% url 'backend:skill' uname %}">
+          <i class="mdi mdi-book-multiple menu-icon"></i>
+          <span class="menu-title">Skills</span>
+        </a>
+      </li>
+      {% if title == "PortfolioBox-work" %}
+      <li class="nav-item active">
+      {% else %}
+      <li class="nav-item">
+      {% endif %}
+        <a class="nav-link" href="{% url 'backend:work' uname %}">
           <i class="mdi mdi-xml menu-icon"></i>
           <span class="menu-title">Work</span>
         </a>
       </li>
+      {% if title == "PortfolioBox-post" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
+      {% endif %}
+        <a class="nav-link" href="{% url 'backend:post' uname %}">
           <i class="mdi mdi-view-headline menu-icon"></i>
           <span class="menu-title">Post</span>
         </a>
       </li>
+      {% if title == "PortfolioBox-hireme" %}
+      <li class="nav-item active">
+      {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
+      {% endif %}
+        <a class="nav-link" href="{% url 'backend:hireme' uname %}">
           <i class="mdi mdi-wunderlist menu-icon"></i>
           <span class="menu-title">Hire me</span>
         </a>
