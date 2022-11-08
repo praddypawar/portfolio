@@ -32,10 +32,10 @@
               <h6 class="font-weight-light">Sign in to continue.</h6>
               <form class="pt-3" method="post">{% csrf_token %}
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input name="uname" type="text" class="form-control form-control-lg" id="" placeholder="Username">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mt-3">
                   <button type="submit" style="background-color:#dc9942;" class="btn btn-block btn-lg font-weight-medium auth-form-btn">SIGN IN</button>

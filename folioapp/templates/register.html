@@ -16,8 +16,9 @@
   <link rel="stylesheet" href="/static/backend/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="/static/backend/images/logo-mini.png" />
+  <link rel="stylesheet" href="/static/sweet-alert.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css">
 </head>
-
 <body>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -32,14 +33,28 @@
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
               <form class="pt-3" method="post">{% csrf_token %}
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username">
+                  <input type="text" id="uname" name="uname" class="form-control form-control-lg" placeholder="Username">
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <div class="col-lg-12">
+                            <label class="form-check-label"><input type="radio" class="form-check-input" value="M" name="gender"/> Male&nbsp;&nbsp;</label>
+                            <label class="form-check-label"><input type="radio" class="form-check-input" value="F" name="gender"/> FeMale&nbsp;&nbsp;</label>
+                            <label class="form-check-label"><input type="radio" class="form-check-input" value="T" name="gender"/> Transgender&nbsp;&nbsp;</label>  
+                        </div>
+                      </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                  <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email">
                 </div>
                 <div class="form-group">
-                  <select class="form-control form-control-lg" id="exampleFormControlSelect2">
-                    <option>Country</option>
+                  <input name="password" id="password" type="password" class="form-control form-control-lg" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <select name="country" id="country" class="form-control form-control-lg">
+                    <option>Select Country</option>
                     <option>United States of America</option>
                     <option>United Kingdom</option>
                     <option>India</option>
@@ -47,19 +62,16 @@
                     <option>Argentina</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
-                </div>
                 <div class="mb-4">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
+                      <input name="terms" type="checkbox" class="form-check-input">
                       I agree to all Terms & Conditions
                     </label>
                   </div>
                 </div>
                 <div class="mt-3">
-                  <button type="submit" style="background-color:#dc9942;" class="btn btn-block btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
+                  <button type="submit" id="signup" style="background-color:#dc9942;" class="btn btn-block btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Already have an account? <a style="color:#dc9942;" href="{% url 'frontend:signin' %}">Login</a>
@@ -69,6 +81,7 @@
           </div>
         </div>
       </div>
+
       <!-- content-wrapper ends -->
     </div>
     <!-- page-body-wrapper ends -->
@@ -82,6 +95,6 @@
   <script src="/static/backend/js/hoverable-collapse.js"></script>
   <script src="/static/backend/js/template.js"></script>
   <!-- endinject -->
-</body>
+</body> 
 
 </html>

@@ -1,25 +1,47 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+from .models import BasicInfo
+
 # Create your views here.
 def logout(request):
+    if "uname" in request.session:
+        del request.session["uname"]
+
+    if "id" in request.session:
+        del request.session["id"]
+
     return redirect("frontend:signin")
 
 
 def dashboard(request,uname):
-    # return HttpResponse(uname)
+    if "uname" not in request.session and "id" not in request.session:
+        return redirect("frontend:signin")
+    if request.session["uname"] != uname:
+        return redirect("frontend:signin")
+    user_data = BasicInfo.objects.get(pk=request.session["id"])
     context = {
         "uname":uname,
-        "title":"PortfolioBox-dashboard"
+        "title":"PortfolioBox-dashboard",
+        "user_data":user_data
     }
     return render(request,"dashboard.html",context)
 
 
 def basicinfo(request,uname):
-    uname = "pradip"
+    if "uname" not in request.session and "id" not in request.session:
+        return redirect("frontend:signin")
+    if request.session["uname"] != uname:
+        return redirect("frontend:signin")
+    user_data = BasicInfo.objects.get(pk=request.session["id"])
+
+    
+
+
     context = {
         "uname":uname,
-        "title":"PortfolioBox-basic-info"
+        "title":"PortfolioBox-basic-info",
+        "user_data":user_data
     }
     return render(request,"basicinfo.html",context)
 
