@@ -1,7 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-
-
 from .models import BasicInfo,SocialMedia,AboutMe,FolioViews
 
 # Create your views here.

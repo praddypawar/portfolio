@@ -39,7 +39,7 @@ def signup(request):
             profile = "profile/female.png"
         try:
             BasicInfo(uname=uname,email=email,password=password,country=country,gender=gender,profile=profile).save()
-            return redirect("signin")
+            return redirect("frontend:signin")
         except Exception as e:
             print("Error",e)
         
