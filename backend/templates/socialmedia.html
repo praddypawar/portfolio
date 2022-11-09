@@ -36,7 +36,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <!-- <h4 class="card-title">Add/Update data</h4> -->
-                                    <form class="form-sample">
+                                    <form method="post" class="form-sample"> {% csrf_token %}
 
                                         <div class="row">
                                             <div class="col-md-5">
@@ -45,7 +45,12 @@
                                                     <div class="col-sm-9">
                                                         <select class="form-control" name="socialmedia[]"
                                                             style="height: 5vh!important">
+                                                            {% if main_social_data.id > 0 %}
+                                                            <option selected value="{{main_social_data.socialmedia_name}}" class="form-control">{{main_social_data.socialmedia_name}}</option>
+                                                            {% else %}
                                                             <option selected class="form-control">Select media</option>
+                                                            {% endif %}
+                                                            
                                                             <option value="twitter" class="form-control">Twitter
                                                             </option>
                                                             <option value="facebook" class="form-control">Facebook
@@ -62,7 +67,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Link</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="link[]" class="form-control" />
+                                                        <input type="text" value="{{main_social_data.link}}" name="link[]" class="form-control" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -73,7 +78,45 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="newinput"></div>
+                                        <div id="newinput">
+                                            {% for i in other_social_data %}
+                                            <div id="row" class="row">
+                                                <div class="col-md-5">
+                                                  <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Social Media</label>
+                                                    <div class="col-sm-9">
+                                                      <select class="form-control" name="socialmedia[]" style="height: 5vh!important">
+                                                        <option selected value="{{i.socialmedia_name}}" class="form-control">{{i.socialmedia_name}}</option>
+                                                        <!-- <option selected class="form-control">Select media</option> -->
+                                                        <option value="twitter" class="form-control">Twitter</option>
+                                                        <option value="facebook" class="form-control">Facebook</option>
+                                                        <option value="linkedin" class="form-control">Linkedin</option>
+                                                        <option value="instagram" class="form-control">Instagram</option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group row">
+                                                      <label class="col-sm-2 col-form-label">Link</label>
+                                                      <div class="col-sm-10">
+                                                        <input type="text" value="{{i.link}}" name="link[]" class="form-control" />
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                <div class="col-md-2 extra-fields-customer">
+                                                  <div class="form-group row">
+                                                    <button class="btn btn-danger"
+                                                                                        id="DeleteRow" type="button">
+                                                                                        <i class="bi bi-trash"></i>
+                                                                                        Delete
+                                                                                    </button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            {% endfor %}
+
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-md-6">

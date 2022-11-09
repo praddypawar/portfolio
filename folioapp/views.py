@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from backend.models import BasicInfo
+from backend.models import BasicInfo,AboutMe,SocialMedia,FolioViews
 
 # Create your views here.
 def index(request):
@@ -34,9 +34,9 @@ def signup(request):
         terms = request.POST.get("terms")
         print(uname,email,password,country,terms)
         if gender == "M":
-            profile = "/profile/male.jpg"
+            profile = "profile/male.jpg"
         else:
-            profile = "/profile/female.png"
+            profile = "profile/female.png"
         try:
             BasicInfo(uname=uname,email=email,password=password,country=country,gender=gender,profile=profile).save()
             return redirect("signin")
@@ -45,3 +45,22 @@ def signup(request):
         
         # messages.error(request,"User Name Not Empty")
     return render(request,"register.html")
+
+def portfolio(request,uname):
+    
+    basicinfo = BasicInfo.objects.get(uname=uname)
+    aboutme = AboutMe.objects.filter(user=basicinfo)
+    socialmedia = SocialMedia.objects.filter(user=basicinfo)
+    if FolioViews.objects.filter(user=basicinfo):
+        viewsuser = FolioViews.objects.get(user=basicinfo)
+        viewsuser.number=viewsuser.number+1
+        viewsuser.save()
+    else:
+        FolioViews(user=basicinfo,number=1).save()
+    context ={
+        "title":uname,
+        "basicinfo":basicinfo,
+        "aboutme":aboutme,
+        "socialmedia":socialmedia
+    }
+    return render(request,"portfolio.html",context)

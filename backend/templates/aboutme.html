@@ -36,14 +36,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <!-- <h4 class="card-title">Add/Update data</h4> -->
-                                    <form class="form-sample">
+                                    <form method="post" class="form-sample">{% csrf_token %}
 
                                         <div class="row">
                                             <div class="col-md-10">
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Paragraph</label>
                                                     <div class="col-sm-10">
-                                                        <textarea type="text" name="aboutme[]" class="form-control"></textarea>
+                                                        <textarea type="text" name="aboutme[]" class="form-control">{{main_aboutme_data.aboutme}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -54,7 +54,29 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="newinput"></div>
+                                        <div id="newinput">
+                                            {% for i in other_aboutme_data %}
+                                            <div id="row" class="row">
+                                                <div class="col-md-10">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2 col-form-label">Paragraph</label>
+                                                        <div class="col-sm-10">
+                                                            <textarea type="text" name="aboutme[]" class="form-control">{{i.aboutme}}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group row">
+                                                        <button class="btn btn-danger"
+                                                id="DeleteRow" type="button">
+                                                <i class="bi bi-trash"></i>
+                                                Delete
+                                            </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
