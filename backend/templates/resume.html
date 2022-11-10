@@ -33,13 +33,13 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">WORK EXPERIENCE</h4>
-                                    <form class="form-sample">
+                                    <form method="post" class="form-sample">{% csrf_token %}
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Designation</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="desi[]" class="form-control">
+                                                        <input type="text" value="{{main_workexperience_data.designation}}" name="desi[]" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -47,7 +47,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Company</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="company[]" class="form-control">
+                                                        <input type="text" value="{{main_workexperience_data.company}}" name="company[]" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -57,7 +57,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Start date</label>
                                                     <div class="col-sm-9">
-                                                        <input type="month" name="sdate[]" class="form-control">
+                                                        <input type="month" value="{{main_workexperience_data.start_date }}" name="sdate[]" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,26 +65,45 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">For End date</label>
                                                     <div class="col-sm-9" style="padding-top: 3%;">
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="N" name="gender"/> Current&nbsp;&nbsp;</label>
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="Y" name="gender"/> Select date&nbsp;&nbsp;</label>
+                                                        {% if main_workexperience_data.end_date == "" %}
+                                                        <label class="form-check-label"><input type="radio"  onchange="checkenddate(this)" class="form-check-input checkenddate" value="N" name="gender[]"/> Current&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="Y" name="gender[]"/> Select date&nbsp;&nbsp;</label>
+                                                    
+                                                        {% else %}
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="N" name="gender[]"/> Current&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" checked onchange="checkenddate(this)" class="form-check-input checkenddate" value="Y" name="gender[]"/> Select date&nbsp;&nbsp;</label>
+                                                    
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% if main_workexperience_data.end_date == "" %}
                                             <div class="col-md-4" id="enddate" style="display:none;">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">End Date</label>
                                                     <div class="col-sm-9">
-                                                        <input type="month" name="edate[]" class="form-control">
+                                                        <input type="month" value="{{main_workexperience_data.end_date }}" name="edate[]" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% else %}
+                                            <div class="col-md-4" id="enddate" style="display:block;">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">End Date</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="month" value="{{main_workexperience_data.end_date }}" name="edate[]" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Description</label>
                                                     <div class="col-sm-9">
-                                                        <textarea name="desc[]" class="form-control"></textarea>
+                                                        <textarea name="desc[]" class="form-control">{{main_workexperience_data.description}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,8 +166,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">For End date</label>
                                                     <div class="col-sm-9" style="padding-top: 3%;">
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="N" name="gender"/> Current&nbsp;&nbsp;</label>
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="Y" name="gender"/> Select date&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="N" name="gender[]"/> Current&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="Y" name="gender[]"/> Select date&nbsp;&nbsp;</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -243,8 +262,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">For End date</label>
                                                     <div class="col-sm-9" style="padding-top: 3%;">
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)"  class="form-check-input checkenddate" value="N" name="gender"/> Current&nbsp;&nbsp;</label>
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)"  class="form-check-input checkenddate" value="Y" name="gender"/> Select date&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)"  class="form-check-input checkenddate" value="N" name="gender[]"/> Current&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)"  class="form-check-input checkenddate" value="Y" name="gender[]"/> Select date&nbsp;&nbsp;</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -319,8 +338,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">For End date</label>
                                                     <div class="col-sm-9" style="padding-top: 3%;">
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="N" name="gender"/> Current&nbsp;&nbsp;</label>
-                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="Y" name="gender"/> Select date&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="N" name="gender[]"/> Current&nbsp;&nbsp;</label>
+                                                        <label class="form-check-label"><input type="radio" onchange="checkenddate(this)" class="form-check-input checkenddate" value="Y" name="gender[]"/> Select date&nbsp;&nbsp;</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -369,7 +388,9 @@
                     }
                     else{
                         // $("#enddate").css("display","none")
+                        // $(e).parents(".row").children("#enddate")
                         $(e).parents(".row").children("#enddate").css("display","none")
+                        
                     }
             }
     </script>

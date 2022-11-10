@@ -39,6 +39,14 @@ class FolioViews(base.Base):
     number = models.BigIntegerField()
         
 
+class WorkExperience(base.Base):
+    user = models.ForeignKey(BasicInfo,on_delete=models.CASCADE)
+    designation =models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    start_date = models.CharField(max_length=255)
+    end_date = models.CharField(null=True, blank=True,max_length=255)
+    description = models.CharField(max_length=255)
+
 
 
 

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .models import BasicInfo,SocialMedia,AboutMe,FolioViews
+from .models import BasicInfo,SocialMedia,AboutMe,FolioViews,WorkExperience
 
 # Create your views here.
 def logout(request):
@@ -153,10 +153,98 @@ def aboutme(request,uname):
     return render(request,"aboutme.html",context)
 
 def resume(request,uname):
-    uname = "pradip"
+    if "uname" not in request.session and "id" not in request.session:
+        return redirect("frontend:signin")
+    if request.session["uname"] != uname:
+        return redirect("frontend:signin")
+    user_data = BasicInfo.objects.get(pk=request.session["id"])
+
+    workexperience_data = WorkExperience.objects.filter(user=user_data).values()
+    main_workexperience_data = []
+    other_workexperience_data = []
+    if len(workexperience_data)>0:
+        main_workexperience_data=workexperience_data[0]
+        other_workexperience_data=workexperience_data[1:]
+
+    if request.method == "POST":
+        desi = request.POST.getlist("desi[]")
+        company = request.POST.getlist("company[]")
+        sdate = request.POST.getlist("sdate[]")
+        edate = request.POST.getlist("edate[]")
+        desc = request.POST.getlist("desc[]")
+        gender = request.POST.getlist("gender[]")
+
+        print(desi,company,sdate,edate,desc,gender,"====")
+
+        workexperience_data_list = list(WorkExperience.objects.filter(user=user_data).values("company","designation"))
+        main_data = []
+
+        for s in workexperience_data:
+            if s["designation"] not in desi and s["company"] not in company:
+                WorkExperience.objects.get(pk=s["id"]).delete()
+
+        if len(workexperience_data_list)>0:
+            for j in range(len(desi)):
+                if {"designation":desi[j],"company":company[j]} not in workexperience_data_list:
+                    if gender[j] == "N":
+                        main_data.append({
+                        "designation":desi[j],
+                        "company":company[j],
+                        "start_data":sdate[j],
+                        "end_data":"",
+                        "description":desc[j]
+                        })
+                    else:
+                        main_data.append({
+                        "designation":desi[j],
+                        "company":company[j],
+                        "start_data":sdate[j],
+                        "end_data":edate[j],
+                        "description":desc[j]
+                        })
+                        
+                    
+        else:
+            for j in range(len(desi)):
+                if gender[j] == "N":
+                    main_data.append({
+                    "designation":desi[j],
+                    "company":company[j],
+                    "start_data":str(sdate[j]),
+                    "end_data":"",
+                    "description":desc[j]
+                    })
+                else:
+                    main_data.append({
+                    "designation":desi[j],
+                    "company":company[j],
+                    "start_data":str(sdate[j]),
+                    "end_data":str(edate[j]),
+                    "description":desc[j]
+                    })
+
+                
+
+        
+        model_instances = [WorkExperience(
+            user=user_data,
+            designation=i["designation"],
+            company=i["company"],
+            start_date=i["start_data"],
+            end_date=i["end_data"],
+            description=i["description"],
+        ) for i in main_data]
+        print("main_data: ",main_data)
+        WorkExperience.objects.bulk_create(model_instances, ignore_conflicts=True)
+        return redirect("backend:resume",uname)
+
+
     context = {
         "uname":uname,
-        "title":"PortfolioBox-resume"
+        "title":"PortfolioBox-resume",
+        "user_data":user_data,
+        "main_workexperience_data":main_workexperience_data,
+        "other_workexperience_data":other_workexperience_data
     }
     return render(request,"resume.html",context)
 
