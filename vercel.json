@@ -15,7 +15,7 @@
     }
   ],
   "files": [
-    "static"  // Include your static files directory here
+    "static"
   ]
   "routes": [
     {
